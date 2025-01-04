@@ -45,12 +45,6 @@ app.get("/", (req, res) => {
 app.use(userRouter);
 app.use(books);
 
-// Start the server
-const PORT = process.env.SERVER_PORT || 8000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
-
 // Graceful shutdown on error or termination
 process.on("SIGINT", () => {
   console.log("Server shutting down...");
