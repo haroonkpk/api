@@ -59,7 +59,7 @@ router.post("/login", async (req, res) => {
     if (result) {
       const token = jwt.sign(
         { email: existingUser.email, role: existingUser.role },
-        process.env.JWT_KEY,
+        process.env.JWT_KEY || KFJKASJFKSAJFKSAJ,
         { expiresIn: "24h" }
       );
       res.send({ user: existingUser, token: token, success: true });
