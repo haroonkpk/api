@@ -4,6 +4,8 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const { router: userRouter } = require("./user");
 const cors = require("cors");
+const serverless = require("serverless-http");
+
 
 // CORS configuration
 const corsConfig = {
@@ -58,4 +60,4 @@ process.on("SIGINT", () => {
   });
 });
 
-module.exports = app; // To allow testing or further usage
+module.exports = serverless(app); // To allow testing or further usage
