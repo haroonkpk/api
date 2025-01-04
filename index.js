@@ -13,6 +13,9 @@ mongoose.connect(uri, {})
     .then(() => console.log('MongoDB connected'))
     .catch(err => console.error('MongoDB connection error:', err));
 
+app.git("/",(req,res)=>{
+    res.send("hello world")
+});
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended:false}))
