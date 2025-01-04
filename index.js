@@ -24,7 +24,7 @@ const uri =
       .catch(err => console.error('MongoDB connection error:', err));
 
 
-    app.git("/",(req,res)=>{
+    app.get("/",(req,res)=>{
     res.send("hello world")
   });
 app.use(userRouter);
