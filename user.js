@@ -47,30 +47,29 @@ router.get("/user",async (req,res)=>{
 
 
 router.post("/login", async (req, res) => {
-  const { email, password } = req.body;
-  const existingUser = await User.findOne({ email });
-  
-  if (!existingUser) {
-    return res.status(404).send({ message: "User not found" });
-  }
+  try {
+    const { email, password } = req.body;
+    const existingUser = await User.findOne({ email });
 
-  bcrypt.compare(password, existingUser.password, (err, result) => {
+    if (!existingUser) {
+      return res.status(404).send({ message: "User not found" });
+    }
+
+    const result = bcrypt.compareSync(password, existingUser.password);
     if (result) {
       const token = jwt.sign(
         { email: existingUser.email, role: existingUser.role },
         process.env.JWT_KEY,
-        { expiresIn: "166h" }  // Token expiration time
+        { expiresIn: "24h" }
       );
-      res.send({
-        user: existingUser,
-        token: token,
-        success: true,
-        message: "Login successfuly"
-      });
+      res.send({ user: existingUser, token: token, success: true });
     } else {
       res.status(401).send({ message: "Invalid credentials" });
     }
-  });
+  } catch (error) {
+    console.error("Login error:", error);
+    res.status(500).send({ message: "Internal Server Error" });
+  }
 });
 
 

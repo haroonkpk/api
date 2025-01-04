@@ -23,3 +23,4 @@ app.listen(process.env.SERVER_PORT,()=>{
     console.log(`server is runing on ${process.env.SERVER_PORT}`);
     
 }) 
+module.exports = app; // آخر میں یہ لائن شامل کریں
